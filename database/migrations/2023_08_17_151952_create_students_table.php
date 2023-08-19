@@ -13,6 +13,19 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->unique();
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('kelas_id')->constrained();
+            $table->foreignId('jurusan_id')->constrained();
+            $table->string('student_avatar')->nullable();
+            $table->string('student_name')->nullable();
+            $table->integer('student_nisn')->nullable();
+            $table->string('student_kelas')->nullable();
+            $table->string('student_jurusan')->nullable();
+            $table->string('phone');
+            $table->enum('gender', ['Laki-laki', 'Perempuan']);
+            $table->text('alamat');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

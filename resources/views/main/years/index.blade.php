@@ -7,11 +7,11 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    Years
-                </div>
-            </div>
+            <x-splade-table :for="$years">
+                <x-splade-cell actions as="$year">
+                    <Link class="px-4 py-2 bg-indigo-400 hover:bg-indigo-600 text-white rounded-md shadow-md shadow-indigo-200 mr-3">Edit</Link>
+                </x-splade-cell>
+            </x-splade-table>
         </div>
     </div>
 </x-app-layout>

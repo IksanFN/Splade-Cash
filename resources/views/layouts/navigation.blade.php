@@ -64,12 +64,18 @@
                             <x-dropdown-link :href="route('profile.edit')">
                                 {{ __('Months') }}
                             </x-dropdown-link>
-                            <x-dropdown-link :href="route('profile.edit')">
+                            <x-dropdown-link :href="route('years.index')">
                                 {{ __('Years') }}
                             </x-dropdown-link>
                             <span class="text-xs text-indigo-400 ps-4">Users Management</span>
                             <x-dropdown-link :href="route('profile.edit')">
                                 {{ __('Users') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('roles.index')">
+                                {{ __('Roles') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('permissions.index')">
+                                {{ __('Permission') }}
                             </x-dropdown-link>
                         </x-slot>
                     </x-dropdown>

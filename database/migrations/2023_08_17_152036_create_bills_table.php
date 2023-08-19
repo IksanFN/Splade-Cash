@@ -13,6 +13,22 @@ return new class extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->unique();
+            // $table->foreignId('student_id')->nullable();
+            $table->foreignId('kelas_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('month_bill_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('week_bill_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('year_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->string('kelas_name')->nullable();
+            $table->string('month_name')->nullable();
+            $table->string('week_name')->nullable();
+            $table->string('year_name')->nullable();
+            $table->date('start_of_week');
+            $table->date('end_of_week');
+            $table->integer('bill')->unsigned();
+            $table->boolean('status')->default(false);
+            $table->text('description')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
