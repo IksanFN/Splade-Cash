@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Main\PermissionController;
+use App\Http\Controllers\Main\RoleController;
+use App\Http\Controllers\Main\YearController;
+use App\Http\Controllers\MainYearController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,10 +40,26 @@ Route::middleware('splade')->group(function () {
             return view('dashboard');
         })->middleware(['verified'])->name('dashboard');
 
-        Route::middleware(['auth', 'role:admin'])->group(function() {
-            Route::get('/years', function() {
-                return view('main.years.index');
-            })->name('years.index');
+        Route::middleware('auth')->group(function() {
+
+           Route::middleware('role:admin')->group(function() {
+                Route::get('/give-role-permission/{role}', [RoleController::class, 'givePermission'])->name('roles.give_permission');
+                Route::post('/give-role-permission/{role}', [RoleController::class, 'storeGivePermission'])->name('roles.store_give_permission');
+                Route::delete('roles/{role}/permission/{permission}', [RoleController::class, 'removePermission'])->name('roles.remove_permission');
+                Route::resource('/roles', RoleController::class);
+                Route::resource('/permissions', PermissionController::class);
+           });
+
+            // Route role admin
+           Route::middleware('role:admin')->group(function() {
+
+            // Route Years
+            Route::prefix('/years')->name('years.')->group(function() {
+                Route::get('/', [YearController::class, 'index'])->name('index');
+            });
+
+           });
+            
         });
 
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
